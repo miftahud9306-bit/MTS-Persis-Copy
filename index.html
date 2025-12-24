@@ -54,6 +54,7 @@
     </style>
 
     <!-- React Libraries (UMD - Global Variables) -->
+    <!-- PENTING: Jangan tambahkan importmap di sini karena akan bentrok dengan UMD -->
     <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-router-dom@6.22.3/umd/react-router-dom.production.min.js"></script>
@@ -79,14 +80,13 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // --- 1. SETUP LIBRARIES & UTILS ---
-        // Karena kita tidak pakai import, kita ambil dari variable global window
+        // --- 1. GLOBAL SETUP ---
         const { useState, useEffect } = React;
         const { createRoot } = ReactDOM;
-        // PENTING: Gunakan HashRouter untuk GitHub Pages agar tidak 404 saat refresh
+        // Gunakan HashRouter agar aman di GitHub Pages
         const { HashRouter, Routes, Route, Link, NavLink, useLocation } = ReactRouterDOM;
         
-        // Lucide Icons global variable
+        // Lucide Icons
         const { 
             BookOpen, Users, Trophy, GraduationCap, MapPin, Phone, Mail, Clock, 
             ArrowRight, ChevronRight, Star, ChevronLeft, CheckCircle, Calendar, 
@@ -94,7 +94,7 @@
             Instagram, Youtube, Medal, Filter 
         } = lucideReact;
 
-        // --- 2. DATA CONSTANTS ---
+        // --- 2. DATA / CONSTANTS ---
         
         const SCHOOL_INFO = {
             name: "MTs Persis Cisomang",
@@ -305,7 +305,7 @@
             );
         };
 
-        // --- 4. COMPONENTS (Navbar, Footer, etc.) ---
+        // --- 4. LAYOUT COMPONENTS ---
 
         const Navbar = () => {
             const [isOpen, setIsOpen] = useState(false);
