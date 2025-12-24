@@ -54,7 +54,6 @@
     </style>
 
     <!-- React Libraries (UMD - Global Variables) -->
-    <!-- Urutan Load PENTING: React -> ReactDOM -> ReactRouter -> Lucide -> Babel -->
     <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-router-dom@6.22.3/umd/react-router-dom.production.min.js"></script>
@@ -70,8 +69,8 @@
     "react": "https://esm.sh/react@^19.2.3",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0"
   }
 }
 </script>
@@ -80,12 +79,14 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // --- 1. SETUP LIBRARIES & UTILS (Global Variable Destructuring) ---
+        // --- 1. SETUP LIBRARIES & UTILS ---
+        // Karena kita tidak pakai import, kita ambil dari variable global window
         const { useState, useEffect } = React;
         const { createRoot } = ReactDOM;
+        // PENTING: Gunakan HashRouter untuk GitHub Pages agar tidak 404 saat refresh
         const { HashRouter, Routes, Route, Link, NavLink, useLocation } = ReactRouterDOM;
         
-        // Mengambil icon dari variabel global lucideReact
+        // Lucide Icons global variable
         const { 
             BookOpen, Users, Trophy, GraduationCap, MapPin, Phone, Mail, Clock, 
             ArrowRight, ChevronRight, Star, ChevronLeft, CheckCircle, Calendar, 
@@ -93,7 +94,7 @@
             Instagram, Youtube, Medal, Filter 
         } = lucideReact;
 
-        // --- 2. CONSTANTS (DATA) ---
+        // --- 2. DATA CONSTANTS ---
         
         const SCHOOL_INFO = {
             name: "MTs Persis Cisomang",
@@ -304,7 +305,7 @@
             );
         };
 
-        // --- 4. LAYOUT COMPONENTS ---
+        // --- 4. COMPONENTS (Navbar, Footer, etc.) ---
 
         const Navbar = () => {
             const [isOpen, setIsOpen] = useState(false);
