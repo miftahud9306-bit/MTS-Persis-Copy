@@ -53,45 +53,37 @@
       ::-webkit-scrollbar-thumb:hover { background: #0F3D2E; }
     </style>
 
-    <!-- React & ReactDOM -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
-    <!-- React Router DOM (Version 6) -->
-    <script src="https://unpkg.com/react-router-dom@6/umd/react-router-dom.production.min.js"></script>
-
-    <!-- Lucide Icons (React Version) -->
-    <script src="https://unpkg.com/lucide-react/dist/lucide-react.min.js"></script>
-
-    <!-- Babel for JSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="importmap">
+    <!-- Import Map: Ini kunci agar library bisa di-import dengan benar tanpa build tool -->
+    <script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3",
+    "lucide-react": "https://esm.sh/lucide-react@0.344.0",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0"
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
   }
 }
 </script>
+
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body class="bg-white text-brand-text antialiased">
     <div id="root"></div>
 
-    <script type="text/babel">
-        // --- 1. SETUP LIBRARIES & UTILS ---
-        const { useState, useEffect } = React;
-        const { HashRouter, Routes, Route, Link, NavLink, useLocation } = ReactRouterDOM;
-        
-        // Destructure Icons from global lucideReact object
-        const { 
+    <!-- Perhatikan: type="text/babel" DAN data-type="module" agar support import -->
+    <script type="text/babel" data-type="module">
+        import React, { useState, useEffect } from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { HashRouter, Routes, Route, Link, NavLink, useLocation } from 'react-router-dom';
+        import { 
             BookOpen, Users, Trophy, GraduationCap, MapPin, Phone, Mail, Clock, 
             ArrowRight, ChevronRight, Star, ChevronLeft, CheckCircle, Calendar, 
-            FileText, Target, Compass, Image: ImageIcon, Menu, X, Facebook, 
+            FileText, Target, Compass, Image as ImageIcon, Menu, X, Facebook, 
             Instagram, Youtube, Medal, Filter 
-        } = lucideReact;
+        } from 'lucide-react';
 
         // --- 2. CONSTANTS (DATA) ---
         
@@ -893,7 +885,7 @@
         };
 
         // --- 7. MOUNT ---
-        const root = ReactDOM.createRoot(document.getElementById('root'));
+        const root = createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
 </body>
