@@ -53,37 +53,45 @@
       ::-webkit-scrollbar-thumb:hover { background: #0F3D2E; }
     </style>
 
-    <!-- Import Map: Ini kunci agar library bisa di-import dengan benar tanpa build tool -->
-    <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@18.2.0",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3",
-    "lucide-react": "https://esm.sh/lucide-react@0.344.0",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
-  }
-}
-</script>
+    <!-- React Libraries (UMD - Global Variables) -->
+    <!-- Urutan Load PENTING: React -> ReactDOM -> ReactRouter -> Lucide -> Babel -->
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-router-dom@6.22.3/umd/react-router-dom.production.min.js"></script>
+    
+    <!-- Lucide Icons UMD -->
+    <script src="https://unpkg.com/lucide-react@0.344.0/dist/umd/lucide-react.min.js"></script>
 
     <!-- Babel for JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
 </head>
 <body class="bg-white text-brand-text antialiased">
     <div id="root"></div>
 
-    <!-- Perhatikan: type="text/babel" DAN data-type="module" agar support import -->
-    <script type="text/babel" data-type="module">
-        import React, { useState, useEffect } from 'react';
-        import { createRoot } from 'react-dom/client';
-        import { HashRouter, Routes, Route, Link, NavLink, useLocation } from 'react-router-dom';
-        import { 
+    <script type="text/babel">
+        // --- 1. SETUP LIBRARIES & UTILS (Global Variable Destructuring) ---
+        const { useState, useEffect } = React;
+        const { createRoot } = ReactDOM;
+        const { HashRouter, Routes, Route, Link, NavLink, useLocation } = ReactRouterDOM;
+        
+        // Mengambil icon dari variabel global lucideReact
+        const { 
             BookOpen, Users, Trophy, GraduationCap, MapPin, Phone, Mail, Clock, 
             ArrowRight, ChevronRight, Star, ChevronLeft, CheckCircle, Calendar, 
-            FileText, Target, Compass, Image as ImageIcon, Menu, X, Facebook, 
+            FileText, Target, Compass, Image: ImageIcon, Menu, X, Facebook, 
             Instagram, Youtube, Medal, Filter 
-        } from 'lucide-react';
+        } = lucideReact;
 
         // --- 2. CONSTANTS (DATA) ---
         
